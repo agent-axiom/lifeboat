@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Turn an issue export into a portable local workspace. Import, review a workflow, and download a self-contained HTML app. No account or API key.">
+<title>Lifeboat Player | Take the work with you.</title>
+<style>
+:root{--paper:#f4f3e8;--surface:#fffef7;--ink:#213d32;--muted:#56675b;--line:#ccd3c2;--lime:#d9ed95;--orange:#9d4927;--danger:#9a342d;--serif:Georgia,'Times New Roman',serif;--mono:'SFMono-Regular',Consolas,'Liberation Mono',monospace}*{box-sizing:border-box}html{color-scheme:light}body{margin:0;color:var(--ink);background:radial-gradient(ellipse at 90% 0,#e3eacb88,transparent 48%),repeating-linear-gradient(90deg,transparent 0,transparent 119px,#213d3205 120px),var(--paper);font:14px/1.6 var(--mono)}button,input,select{font:inherit}button,a,input,select{touch-action:manipulation}button,a{ -webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}button,.button{border:1px solid var(--line);border-radius:5px;background:var(--surface);color:var(--ink);padding:10px 15px;line-height:1.4;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:12px;font-weight:600}button:hover:not(:disabled),.button:hover{border-color:var(--ink)}button.primary,.button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}button.lime{background:var(--lime);border-color:#bbd278}button.quiet{background:transparent;padding:6px 9px}a{color:inherit;text-underline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--orange);outline-offset:3px}input[type=text],input[type=search],select{width:100%;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:4px;color:var(--ink);padding:10px;font-size:12px}input[type=checkbox]{width:17px;height:17px;accent-color:var(--ink);flex:none}h1,h2,h3,p{margin:0}h1,h2,h3{font-family:var(--serif);font-weight:400}h1{font-size:clamp(40px,6.3vw,76px);letter-spacing:-3px;line-height:1.03;max-width:830px}h2{font-size:32px;line-height:1.13;letter-spacing:-.8px}h3{font-size:24px;line-height:1.2}.eyebrow{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;font-weight:600}.muted{color:var(--muted)}.small{font-size:11px}.wrap{width:min(1400px,calc(100% - 64px));margin:auto;min-width:0}.topbar{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:23px 0;border-bottom:1px solid var(--line)}.brand{font-family:var(--serif);font-size:26px;font-weight:bold;text-decoration:none;letter-spacing:-1px}.brand span{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:1px;margin-left:9px}.topbar nav{display:flex;align-items:center;gap:18px;font-size:11px}.privacy-pill{display:flex;align-items:center;gap:7px;font-size:10px}.dot{width:7px;height:7px;border-radius:50%;background:#63814c}.intro{display:grid;grid-template-columns:1fr 310px;gap:45px;padding:54px 0 37px;animation:arrive .45s both}.intro .eyebrow{color:var(--orange);margin-bottom:18px}.intro .lead{max-width:680px;margin-top:23px;color:var(--muted);font-size:13px;line-height:1.9}.ownership{align-self:end;border-left:1px solid var(--line);padding-left:26px;margin-bottom:4px}.ownership li{margin:9px 0}.ownership ol{padding-left:20px;font-size:11px}.ownership strong{font-weight:600}.entry{display:grid;grid-template-columns:1.4fr 1fr;gap:26px;padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:7px;animation:arrive .5s .08s both}.dropzone{border:1px dashed #a8b69a;border-radius:5px;padding:28px;background:#edf1e333;transition:background .15s}.dropzone.dragging{background:var(--lime)}.dropzone h2{margin:10px 0 14px}.dropzone p{max-width:590px}.buttons{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-top:18px}.file-label{cursor:pointer}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.sample-box{padding:15px 7px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}.sample-box h3{margin:10px 0}.sample-box p{font-size:12px;color:var(--muted);max-width:360px}.sample-box .small{margin-top:13px;font-size:10px}.message{border:1px solid var(--line);border-left:4px solid #6d8647;border-radius:4px;background:#eaf0dc;padding:12px 16px;font-size:12px;margin:22px 0;overflow-wrap:anywhere}.message.error{background:#fff0e8;border-color:#d9b09b;border-left-color:var(--danger);color:#772d25}.workspace-header{display:flex;justify-content:space-between;align-items:flex-start;gap:25px;margin:35px 0 16px}.workspace-header h2{overflow-wrap:anywhere}.workspace-header .eyebrow{margin-bottom:9px}.workspace-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;max-width:460px}.workspace-note{font-size:10px;color:var(--muted);margin-top:10px}.report{padding:15px 18px;border-block:1px solid var(--line);margin-bottom:20px;background:#e7ecd93d;display:flex;gap:20px;align-items:flex-start;justify-content:space-between}.report p{font-size:11px;max-width:940px;overflow-wrap:anywhere}.workbench{display:grid;grid-template-columns:245px minmax(0,1fr) 325px;gap:18px;align-items:start}.panel{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden}.panel-head{padding:18px;border-bottom:1px solid var(--line)}.panel-head h3{margin-top:7px}.filters{display:grid;gap:10px;margin-top:16px}.issue-list{max-height:630px;overflow:auto;padding:8px}.issue-list button{width:100%;display:block;text-align:left;border-color:transparent;background:transparent;margin:3px 0;padding:12px}.issue-list button[aria-pressed=true]{background:#e9efd9;border-color:#a9bc8f}.issue-list button .ref{display:flex;justify-content:space-between;gap:10px;font-size:9px;color:var(--muted);font-weight:400}.issue-list button .issue-name{display:block;font-family:var(--serif);font-size:17px;font-weight:400;line-height:1.32;margin-top:7px;overflow-wrap:anywhere}.list-footer{padding:12px;font-size:10px;border-top:1px solid var(--line)}.issue-detail{padding:25px}.issue-detail h2{font-size:31px;margin:13px 0 16px;overflow-wrap:anywhere}.tags{display:flex;flex-wrap:wrap;gap:6px;margin:13px 0}.tag{font-size:9px;line-height:1.4;background:#e9ecdf;border:1px solid #d8dfcb;border-radius:3px;padding:4px 7px;overflow-wrap:anywhere;max-width:100%}.status-tag{background:var(--lime);border-color:#bed282}.description{white-space:pre-wrap;overflow-wrap:anywhere;max-height:370px;overflow:auto;font-family:var(--mono);font-size:12px;line-height:1.8;color:#485d4f;margin:18px 0}.check-label{display:flex;align-items:flex-start;gap:9px;font-size:11px;cursor:pointer}.archive-row{border-block:1px solid var(--line);padding:14px 0;margin:20px 0 16px}.archive-row p{font-size:9px;color:var(--muted);margin:5px 0 0 26px}.revision{font-size:9px;color:var(--muted);margin-top:12px}.change-preview{padding:16px;background:#edf1e3;border:1px solid #d6dfc7;border-radius:4px;margin-top:22px}.change-preview h3{font-size:20px;margin:8px 0 12px}.change-preview p{font-size:11px;overflow-wrap:anywhere}.change-preview .comparison{display:grid;grid-template-columns:62px 1fr;gap:7px;margin-top:11px}.contract{padding:20px}.contract>p{font-size:11px;margin:12px 0}.contract .fields{display:grid;gap:12px;margin:19px 0}.field{display:grid;gap:5px;font-size:10px}.contract .check-label{margin:18px 0 10px}.contract button.primary{width:100%}.contract-state{font-size:9px;padding:5px 8px;background:#ece7d6;border-radius:3px;display:inline-block;margin:12px 0 0}.contract-state.accepted{background:var(--lime)}details{font-size:11px;margin-top:17px;min-width:0}summary{cursor:pointer}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:10px/1.7 var(--mono);max-height:380px;overflow:auto;background:#eff1e8;padding:13px;border-radius:4px;margin-bottom:0}.evidence-strip{display:grid;grid-template-columns:1.2fr 1fr;gap:30px;border-top:1px solid var(--line);margin-top:27px;padding-top:23px}.activity{list-style:none;padding:0;margin:12px 0 0;max-height:240px;overflow:auto}.activity li{padding:8px 0;border-bottom:1px solid var(--line);font-size:10px;overflow-wrap:anywhere}.activity time{display:block;color:var(--muted);font-size:9px}.storage-box{padding:18px;background:#e8edde;border:1px solid var(--line);border-radius:5px}.storage-box p{font-size:10px;margin-top:12px}.storage-box .buttons{margin-top:10px}.scope{display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px;border-top:1px solid var(--line);padding:35px 0;margin-top:40px}.scope h3{font-size:21px;margin-bottom:10px}.scope p{font-size:11px;color:var(--muted)}footer{display:flex;justify-content:space-between;gap:20px;padding:22px 0 32px;border-top:1px solid var(--line);font-size:10px;color:var(--muted)}[hidden]{display:none!important}.empty-list{padding:20px;font-size:11px;color:var(--muted)}@keyframes arrive{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}@media(max-width:1120px){.workbench{grid-template-columns:240px minmax(0,1fr)}.contract-panel{grid-column:1/-1}.contract{display:grid;grid-template-columns:1fr 1fr;gap:0 30px}.contract>.eyebrow,.contract>h3,.contract>.contract-state{grid-column:1/-1}.contract .fields{grid-column:1}.contract>.acceptance-area{grid-column:2;grid-row:4/8}.intro{grid-template-columns:1fr 250px;gap:25px}}@media(max-width:760px){.wrap{width:calc(100% - 32px)}.topbar{padding:17px 0}.topbar nav{gap:12px}.privacy-pill{display:none}.intro{grid-template-columns:1fr;padding-top:35px;gap:25px}h1{letter-spacing:-1.8px}.intro .lead{font-size:12px}.ownership{border-left:0;border-top:1px solid var(--line);padding:15px 0 0}.ownership ol{display:flex;flex-wrap:wrap;gap:5px 28px;padding-left:17px;margin:0}.entry{grid-template-columns:1fr;padding:15px;gap:12px}.dropzone{padding:21px}.sample-box{padding:13px 6px}.workspace-header{flex-direction:column}.workspace-actions{justify-content:flex-start}.report{display:block}.workbench{grid-template-columns:1fr}.issue-list{max-height:255px}.contract-panel{grid-column:auto}.contract{display:block}.contract .fields{display:grid}.issue-detail{padding:20px}.evidence-strip,.scope{grid-template-columns:1fr;gap:23px}.scope{margin-top:30px}.workspace-actions button{flex:1 1 150px}.workspace-header h2{font-size:28px}footer{flex-direction:column;gap:9px}.topbar nav .home-link{display:none}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to workspace</a>
+<div class="wrap">
+<header class="topbar"><a class="brand" href="https://agent-axiom.github.io/lifeboat/">Lifeboat<span>PLAYER / WEB</span></a><nav aria-label="Main navigation"><span class="privacy-pill"><span class="dot" aria-hidden="true"></span>No data uploads</span><a class="home-link" href="https://agent-axiom.github.io/lifeboat/">About Lifeboat</a><a href="https://github.com/agent-axiom/lifeboat/issues/1" target="_blank" rel="noopener noreferrer">Give feedback</a></nav></header>
+<main id="main">
+<section class="intro" aria-labelledby="intro-title"><div><p class="eyebrow">Your data. Your rules. One file to keep.</p><h1 id="intro-title">Take the work.<br>Leave the dependency.</h1><p class="lead">An export should be a beginning, not a dead end. Bring your issue snapshot, review a workflow, and download a working HTML app. Open it again without this website, an account, or an AI connection.</p></div><aside class="ownership"><p class="eyebrow">The handoff</p><ol><li><strong>Bring</strong> a snapshot.</li><li><strong>Accept</strong> explicit behavior.</li><li><strong>Keep</strong> the app and your data.</li></ol></aside></section>
+<section class="entry" aria-label="Start a workspace"><div class="dropzone" id="dropzone"><p class="eyebrow">01 / Bring your own data</p><h2>Your export goes here.</h2><p class="small muted">GitHub issue JSON, Jira issue-search JSON, Trello board JSON, or CSV. Files are processed in this tab, not uploaded. UTF-8 sources up to 5 MB and 2,000 items.</p><div class="buttons"><label class="button primary file-label" for="import-file">Choose an export</label><input class="visually-hidden" id="import-file" type="file" accept=".json,.csv,application/json,text/csv" aria-label="Import an issue export or Lifeboat backup"><button id="csv-template" type="button">Get CSV template</button></div><p class="small muted" style="margin-top:12px">Or drop a file here. Lifeboat JSON backups are supported too.</p></div><div class="sample-box"><p class="eyebrow">Or start in thirty seconds</p><h3>Reopen a regression. Keep the rule.</h3><p>Try the fictional Harbor CLI snapshot with the two-step triage behavior originally designed with GPT-6 Astra.</p><div class="buttons"><button class="lime" id="load-sample" type="button">Try the sample</button><button class="quiet" id="restore-start" type="button">Restore browser backup</button></div><p class="small">No live AI generation here. Custom AI design remains in Studio. Editing this browser recipe is a manual configuration.</p></div></section>
+<div id="notice" class="message" role="status" aria-live="polite" hidden></div>
+<section id="workspace" hidden aria-labelledby="workspace-title">
+<header class="workspace-header"><div><p class="eyebrow" id="source-kind"></p><h2 id="workspace-title"></h2><p class="workspace-note" id="save-state">Download a copy before closing this tab.</p></div><div><div class="workspace-actions"><button id="download-app" class="primary" type="button" disabled>Download your HTML app</button><button id="export-json" type="button">Export working JSON</button><button id="export-original" type="button">Download original</button></div><p class="workspace-note">Downloads contain your data in plain text. Keep private exports private.</p></div></header>
+<div class="report"><p id="import-report"></p></div>
+<div class="workbench">
+<aside class="panel" aria-label="Issues"><div class="panel-head"><p class="eyebrow">02 / Your working copy</p><h3 id="item-count">Issues</h3><div class="filters"><input id="search" type="search" placeholder="Search title, ID, or label" aria-label="Search issues"><select id="filter" aria-label="Filter issues"><option value="all">All items</option><option value="active">Not archived</option><option value="archived">Archived</option></select></div></div><div class="issue-list" id="issue-list"></div><div class="list-footer" id="list-footer"></div></aside>
+<article class="panel issue-detail" aria-labelledby="issue-title"><p class="eyebrow" id="issue-reference"></p><h2 id="issue-title"></h2><div class="tags" id="issue-tags"></div><p class="description" id="issue-description"></p><div class="archive-row"><label class="check-label"><input id="archive-item" type="checkbox">Archive this item locally</label><p>This is a local flag, not a change to your issue tracker.</p></div><button id="run-action" class="primary" type="button" disabled>Reopen for triage</button><p class="revision" id="revision"></p><section class="change-preview" aria-labelledby="preview-title"><p class="eyebrow">Preview / no changes applied</p><h3 id="preview-title">What this action will do</h3><p id="guard-result"></p><div id="preview-changes"></div></section></article>
+<aside class="panel contract-panel" aria-label="Workflow contract"><div class="contract"><p class="eyebrow">03 / The inspectable part</p><h3>A rule, not a guess.</h3><span class="contract-state" id="contract-state">Review required</span><p id="recipe-origin" class="muted"></p><div class="fields"><label class="field">Action name<input type="text" id="action-name" maxlength="60" value="Reopen for triage"></label><label class="field">Add this label<input type="text" id="action-label" maxlength="80" value="priority"></label><label class="field">Then move to this local status<input type="text" id="action-status" maxlength="80" value="Open"></label><button class="quiet" type="button" id="restore-recipe">Use the Astra example recipe</button></div><div class="acceptance-area"><p class="small"><strong>Guard:</strong> refuse archived items. Repeating an action that already matches changes nothing. The original export is never edited.</p><label class="check-label"><input type="checkbox" id="review-check">I reviewed the two steps and preview. Apply this workflow only to my local working copy.</label><button class="primary" id="accept-contract" type="button" disabled>Accept this workflow</button><p class="small muted" style="margin-top:12px">Editing the recipe requires fresh acceptance. New imports and reopened copies require a review before actions are enabled.</p><details><summary>Inspect the browser contract</summary><pre id="contract-json"></pre></details><p class="small muted" style="margin-top:12px">This is the browser recipe format, not the native Studio contract format. <a href="https://agent-axiom.github.io/lifeboat/evidence/astra-contract.json" target="_blank" rel="noopener noreferrer">View the original Astra example</a>.</p></div></div></aside>
+</div>
+<div class="evidence-strip"><section><p class="eyebrow">What changed / local activity</p><p class="small muted" style="margin-top:8px">Last 200 entries. This is an editable local log, not signed proof of authorship.</p><ol class="activity" id="activity"></ol></section><section class="storage-box"><p class="eyebrow">Your tab is not a backup.</p><label class="check-label" style="margin-top:13px"><input id="remember" type="checkbox">Also keep a backup in this browser</label><p>Off by default. Browser storage can be cleared or unavailable. Download HTML or JSON for a durable copy. An HTML file does not rewrite itself when you make more edits.</p><div class="buttons"><button class="quiet" id="restore-backup" type="button">Restore saved copy</button><button class="quiet" id="forget-backup" type="button">Forget browser copy</button></div><details><summary>Original snapshot integrity</summary><pre id="source-integrity"></pre></details></section></div>
+</section>
+<section class="scope" aria-label="Scope and privacy"><article><h3>Useful, not magical.</h3><p>Imports are snapshots, not integrations. No comments or attachments are fetched. Displayed fields are normalized; all original UTF-8 source content stays in the downloadable original. Jira rich text is shown as plain text.</p></article><article><h3>Intelligence at design time.</h3><p>The starting recipe follows the reviewed Astra example: add priority, then move to Open, unless archived. This Player executes two supported steps deterministically. Editing the fields is not a new AI generation.</p></article><article><h3>Portable by construction.</h3><p>The downloaded HTML includes the interface, engine, original snapshot, and working state. No external fonts, scripts, analytics, or API requests. Offline copies still need a JavaScript-capable browser; external help links need internet.</p></article></section>
+</main><footer><span>Lifeboat / independent preview / built with GPT-6 Astra</span><span>Nothing is sent back to GitHub, Jira, or Trello.</span></footer>
+</div>
+<script id="embedded-workspace" type="application/json">null</script>
+<script>
+(() => {
+  'use strict';
+  const FORMAT = 'lifeboat.browser-player.v1';
+  const STORAGE = 'lifeboat.browser-player.backup.v1';
+  const MAX_SOURCE = 5 * 1024 * 1024, MAX_FILE = 30 * 1024 * 1024, MAX_ITEMS = 2000;
+  const $ = id => document.getElementById(id);
+  const clone = value => JSON.parse(JSON.stringify(value));
+  const textSize = value => new TextEncoder().encode(value).length;
+  const now = () => new Date().toISOString();
+  const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+  const same = (a,b) => JSON.stringify(a) === JSON.stringify(b);
+  let workspace = null, selected = null, accepted = null, dirty = false, busy = false, validDraft = true, listLimit = 80;
+  function fail(message) { throw new Error(message); }
+  function string(value, name, max, empty = false) {
+    if (typeof value !== 'string' || value.length > max || (!empty && !value.trim())) fail(name + ' is missing or too long.');
+    return value;
+  }
+  function scalar(value, fallback) {
+    if (value === null || value === undefined || value === '') return fallback;
+    if (typeof value === 'number' && !Number.isSafeInteger(value)) fail('An ID is outside the safe integer range. Export IDs as strings.');
+    if (typeof value !== 'number' && typeof value !== 'string') fail('Expected a text or numeric ID.');
+    return String(value);
+  }
+  function labelNames(value) {
+    if (value === null || value === undefined) return [];
+    if (!Array.isArray(value) || value.length > 200) fail('Labels must be an array with at most 200 entries.');
+    const names = value.map(label => {
+      if (typeof label === 'string') return string(label,'Label',128,true).trim();
+      if (isObject(label)) return string(label.name || label.color || '', 'Label',128,true).trim();
+      fail('Unsupported label value.');
+    }).filter(Boolean);
+    return Array.from(new Set(names));
+  }
+  function bool(value) {
+    if (value === undefined || value === null || value === '') return false;
+    if (typeof value === 'boolean') return value;
+    if (value === 1 || value === '1' || /^(true|yes)$/i.test(String(value))) return true;
+    if (value === 0 || value === '0' || /^(false|no)$/i.test(String(value))) return false;
+    fail('Archived values must be true/false, yes/no, or 1/0.');
+  }
+  function plainDescription(value, depth = 0) {
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'string') return string(value, 'Description', 500000, true);
+    if (depth > 40 || !isObject(value)) fail('Unsupported or overly nested rich-text description.');
+    if (typeof value.text === 'string') return value.text;
+    if (!Array.isArray(value.content)) return '';
+    const separator = ['doc','bulletList','orderedList','table'].includes(value.type) ? '\n' : '';
+    return value.content.map(child => plainDescription(child,depth+1)).join(separator);
+  }
+  function item(id, reference, title, description, status, labels, archived) {
+    return {id:string(id,'ID',1200),reference:string(reference,'Reference',1200),title:string(title,'Title',2000),description:string(description,'Description',500000,true),status:string(status,'Status',128),labels:labelNames(labels),archived:bool(archived),revision:1};
+  }
+  function parseCSV(text) {
+    const rows = [], row = []; let field = '', quoted = false, afterQuote = false;
+    text = text.replace(/^\uFEFF/,'');
+    function pushField() { row.push(field); field=''; afterQuote=false; }
+    function pushRow() { pushField(); if (row.some(cell => cell.trim())) rows.push(row.splice(0)); else row.length=0; }
+    for (let i=0;i<text.length;i++) {
+      const c=text[i];
+      if (quoted) {
+        if (c==='"') { if (text[i+1]==='"') {field+='"';i++;} else {quoted=false;afterQuote=true;} }
+        else field+=c;
+      } else if (c===',') pushField();
+      else if (c==='\n' || c==='\r') {pushRow();if(c==='\r' && text[i+1]==='\n')i++;}
+      else if (c==='"' && field==='' && !afterQuote) quoted=true;
+      else if (afterQuote && /[ \t]/.test(c)) continue;
+      else if (c==='"' || afterQuote) fail('Malformed CSV quoting. Use comma-separated UTF-8 CSV with quoted multiline fields.');
+      else field+=c;
+      if (rows.length>MAX_ITEMS+1) fail('The browser preview supports at most 2,000 items.');
+    }
+    if (quoted) fail('CSV contains an unclosed quoted field.');
+    if (field || row.length || afterQuote) pushRow();
+    if (rows.length<2) fail('CSV needs a header row and at least one item.');
+    const headers=rows.shift().map(h=>h.trim().toLowerCase());
+    const index=names=>headers.findIndex(h=>names.includes(h));
+    const title=index(['title','summary','name']);
+    if(title<0) fail('CSV needs a title, summary, or name column. Download the template for an example.');
+    const id=index(['id','issue key','key','number']), desc=index(['description','body','desc']), status=index(['status','state','list']), archived=index(['archived','archive']);
+    const labelColumns=headers.map((h,i)=>['label','labels'].includes(h)?i:-1).filter(i=>i>=0);
+    const items=rows.map((r,i)=>{
+      if(r.length!==headers.length)fail('CSV row '+(i+2)+' has '+r.length+' fields; the header has '+headers.length+'.');
+      const key=id<0 || !r[id].trim()?String(i+1):r[id].trim();
+      return item('csv:'+key,key,r[title],desc<0?'':r[desc],status<0 || !r[status].trim()?'Open':r[status].trim(),labelColumns.flatMap(c=>r[c].split(/[;|]/)),archived<0?false:r[archived]);
+    });
+    return {kind:'CSV',items,warnings:['CSV labels are split on semicolons or pipes. Unmapped columns remain in the original.',...(status<0?['No status column: local status defaults to Open.']:[])]};
+  }
+  function parseSource(text) {
+    if(textSize(text)>MAX_SOURCE)fail('Source exports are limited to 5 MB. Use a smaller snapshot.');
+    const clean=text.replace(/^\uFEFF/,'').trim();
+    if(!clean)fail('The file is empty.');
+    let result;
+    if(!/^[\[{]/.test(clean)) result=parseCSV(text);
+    else {
+      let data; try{data=JSON.parse(clean);}catch{fail('The file is not valid JSON.');}
+      if(isObject(data) && data.format===FORMAT)fail('A backup cannot contain another backup as its original source.');
+      if(isObject(data) && Array.isArray(data.cards) && Array.isArray(data.lists)) {
+        if(data.cards.length>MAX_ITEMS)fail('The browser preview supports at most 2,000 items.');
+        const lists=new Map(data.lists.filter(isObject).map(l=>[String(l.id),l]));
+        const labels=new Map((Array.isArray(data.labels)?data.labels:[]).filter(isObject).map(l=>[String(l.id),l]));
+        result={kind:'Trello',warnings:['Board and list names become local statuses. Attachments, members, and comments remain only in the source unless present in the displayed description.'],items:data.cards.map((c,i)=>{
+          if(!isObject(c))fail('Invalid Trello card.');
+          const list=lists.get(String(c.idList));
+          if(!list || typeof list.name!=='string')fail('A Trello card refers to a missing list. Export the complete board with lists.');
+          const cardLabels=Array.isArray(c.labels)?c.labels:(Array.isArray(c.idLabels)?c.idLabels.map(id=>labels.get(String(id))).filter(Boolean):[]);
+          return item('trello:'+scalar(c.id,String(i+1)),scalar(c.idShort,scalar(c.id,String(i+1))),c.name,plainDescription(c.desc),list.name,cardLabels,bool(c.closed)||bool(list.closed)||bool(data.closed));
+        })};
+      } else {
+        let records=Array.isArray(data)?data:(isObject(data)&&Array.isArray(data.issues)?data.issues:(isObject(data)&&Array.isArray(data.items)?data.items:null));
+        if(!records)fail('Unsupported JSON. Use a GitHub issues array, Jira {issues: [...]}, or Trello board {cards, lists}.');
+        if(records.length && records.every(Array.isArray))records=records.flat();
+        if(records.length>MAX_ITEMS)fail('The browser preview supports at most 2,000 items.');
+        if(records.some(r=>!isObject(r)))fail('Issue records must be JSON objects.');
+        const jira=records.length>0 && records.every(r=>isObject(r.fields));
+        if(jira) result={kind:'Jira',warnings:['Jira rich text is shown as plain text. Other fields remain in the original; no additional pages or attachments are fetched.'],items:records.map((r,i)=>{
+          const f=r.fields, key=scalar(r.key,scalar(r.id,String(i+1)));
+          return item('jira:'+key,key,f.summary,plainDescription(f.description),isObject(f.status)?f.status.name:(typeof f.status==='string'?f.status:'Open'),f.labels,bool(r.archived));
+        })};
+        else {
+          const issues=records.filter(r=>!Object.prototype.hasOwnProperty.call(r,'pull_request'));
+          result={kind:'GitHub',warnings:['Only supplied pages are imported. Comments and attachments are not fetched; omitted fields remain in the source. GitHub locking is not treated as archiving.'],items:issues.map((r,i)=>{
+            const state=typeof r.state==='string'?r.state.toLowerCase():'open';
+            return item('github:'+scalar(r.id,scalar(r.number,String(i+1))),r.number===undefined?scalar(r.id,String(i+1)):'#'+scalar(r.number,''),r.title,plainDescription(r.body ?? r.body_text),state==='open'?'Open':state==='closed'?'Closed':String(r.state),r.labels,bool(r.archived));
+          })};
+          if(records.length!==issues.length)result.warnings.push((records.length-issues.length)+' pull request record(s) skipped from the working view, retained in the original.');
+        }
+        if(isObject(data) && typeof data.total==='number' && data.total>records.length)result.warnings.push('The source reports more items than this snapshot contains. Import all pages if you need a complete archive.');
+      }
+    }
+    if(!result.items.length)fail('No supported issue records were found.');
+    if(result.items.length>MAX_ITEMS)fail('The browser preview supports at most 2,000 items.');
+    if(new Set(result.items.map(i=>i.id)).size!==result.items.length)fail('Duplicate item IDs found. Import a single consistent snapshot; duplicate pages are not merged automatically.');
+    return result;
+  }
+  function recipe(name='Reopen for triage',label='priority',status='Open') {
+    return {schema:'lifeboat.browser-workflow.v1',name,guard:'not_archived',steps:[{type:'add_label',value:label},{type:'set_status',value:status}]};
+  }
+  function validateRecipe(value) {
+    if(!isObject(value)||value.schema!=='lifeboat.browser-workflow.v1'||value.guard!=='not_archived'||!Array.isArray(value.steps)||value.steps.length!==2||value.steps[0]?.type!=='add_label'||value.steps[1]?.type!=='set_status')fail('Unsupported workflow. Only guarded add-label then set-status browser recipes are supported.');
+    return recipe(string(value.name,'Action name',60).trim(),string(value.steps[0].value,'Action label',80).trim(),string(value.steps[1].value,'Action status',80).trim());
+  }
+  async function checksum(text) {
+    if(!globalThis.crypto?.subtle)return null;
+    try {const buffer=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text));return Array.from(new Uint8Array(buffer),b=>b.toString(16).padStart(2,'0')).join('');} catch{return null;}
+  }
+  async function decode(text,name) {
+    let envelope=null;
+    if(/^[\s\uFEFF]*\{/.test(text)) {try {const value=JSON.parse(text.replace(/^\uFEFF/,''));if(value.format===FORMAT)envelope=value;}catch{}}
+    const raw=envelope?string(envelope.source?.text,'Original source',MAX_SOURCE):text;
+    const sourceName=envelope?string(envelope.source?.name,'Source filename',240):name;
+    const parsed=parseSource(raw), hash=await checksum(raw);
+    if(envelope?.source?.sha256 && hash && envelope.source.sha256!==hash)fail('The original snapshot checksum does not match this backup. Import the original export instead.');
+    const uid=globalThis.crypto?.randomUUID?.() || 'workspace-'+Date.now()+'-'+Math.random().toString(16).slice(2);
+    const next={id:uid,title:sourceName.replace(/\.(json|csv)$/i,''),source:{name:sourceName,text:raw,sha256:hash,kind:parsed.kind,importedAt:now()},items:parsed.items,contract:recipe(),audit:[],warnings:parsed.warnings,lastAcceptance:null};
+    if(envelope) {
+      if(envelope.version!==1 || !Array.isArray(envelope.items)||envelope.items.length!==next.items.length)fail('This backup has an unsupported version or an incomplete working copy.');
+      const byId=new Map();
+      for(const saved of envelope.items){if(!isObject(saved)||typeof saved.id!=='string'||byId.has(saved.id))fail('Invalid or duplicate backup item.');byId.set(saved.id,saved);}
+      next.items=next.items.map(original=>{
+        const saved=byId.get(original.id); if(!saved)fail('Working items do not match the original source.');
+        if(typeof saved.archived!=='boolean'||!Number.isSafeInteger(saved.revision)||saved.revision<1||saved.revision>1000000000)fail('Invalid archived flag or revision in backup.');
+        return {...original,status:string(saved.status,'Saved status',128),labels:labelNames(saved.labels),archived:saved.archived,revision:saved.revision};
+      });
+      next.contract=validateRecipe(envelope.contract);
+      next.title=string(envelope.title || next.title,'Workspace title',240);
+      if(Array.isArray(envelope.audit))next.audit=envelope.audit.slice(-200).filter(e=>isObject(e)&&typeof e.at==='string'&&e.at.length<=50&&typeof e.event==='string'&&e.event.length<=500).map(e=>({at:e.at,event:e.event}));
+      next.warnings.push('Restored working state. Review this imported workflow before running it; acceptance metadata is not an identity signature.');
+    }
+    return next;
+  }
+  function notify(message,error=false) {$('notice').hidden=false;$('notice').classList.toggle('error',error);$('notice').textContent=message;}
+  function audit(event) {workspace.audit.push({at:now(),event});workspace.audit=workspace.audit.slice(-200);}
+  function documentData() {return {format:FORMAT,version:1,title:workspace.title,source:clone(workspace.source),items:workspace.items.map(({id,status,labels,archived,revision})=>({id,status,labels:[...labels],archived,revision})),contract:clone(workspace.contract),audit:clone(workspace.audit),lastAcceptance:workspace.lastAcceptance,exportedAt:now()};}
+  function markChanged() {
+    dirty=true;
+    if($('remember').checked) {
+      try{localStorage.setItem(STORAGE,JSON.stringify(documentData()));$('save-state').textContent='Backed up in this browser. Download a durable copy too.';}
+      catch{$('remember').checked=false;$('save-state').textContent='Browser backup failed. Download HTML or JSON before closing.';notify('Browser storage is unavailable or full. Your working copy is still in this tab; download it now.',true);}
+    } else $('save-state').textContent='Unsaved changes in this tab. Download HTML or JSON before closing.';
+  }
+  function acceptedNow(){return validDraft && accepted===JSON.stringify(workspace?.contract);}
+  function current(){return workspace?.items.find(i=>i.id===selected);}
+  function preview(row) {
+    if(row.archived)return {allowed:false,changed:false,next:row};
+    const next={...row,labels:[...row.labels]};
+    const label=workspace.contract.steps[0].value, status=workspace.contract.steps[1].value;
+    if(!next.labels.includes(label))next.labels.push(label);
+    next.status=status;
+    const changed=next.status!==row.status || !same(next.labels,row.labels);
+    if(changed)next.revision++;
+    return {allowed:true,changed,next};
+  }
+  function node(tag,text,className) {const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;return el;}
+  function renderList() {
+    const query=$('search').value.trim().toLowerCase(), filter=$('filter').value;
+    const rows=workspace.items.filter(i=>(filter==='all'||(filter==='archived'?i.archived:!i.archived))&&(!query||[i.reference,i.title,...i.labels].join(' ').toLowerCase().includes(query)));
+    $('item-count').textContent=workspace.items.length+' items';
+    const list=$('issue-list');list.replaceChildren();
+    for(const row of rows.slice(0,listLimit)) {
+      const button=node('button');button.type='button';button.setAttribute('aria-pressed',String(row.id===selected));
+      const ref=node('span',undefined,'ref');ref.append(node('span',row.reference),node('span',row.archived?'Archived':row.status));
+      button.append(ref,node('span',row.title,'issue-name'));button.addEventListener('click',()=>{selected=row.id;renderList();renderDetail();});list.append(button);
+    }
+    if(!rows.length)list.append(node('p','No matching items. Your selected item remains available.','empty-list'));
+    $('list-footer').replaceChildren(node('span',Math.min(rows.length,listLimit)+' of '+rows.length+' matching items'));
+    if(rows.length>listLimit){const more=node('button','Show more','quiet');more.type='button';more.addEventListener('click',()=>{listLimit+=80;renderList();});$('list-footer').append(more);}
+  }
+  function renderDetail() {
+    const row=current();if(!row)return;
+    $('issue-reference').textContent=row.reference+' / local working copy';$('issue-title').textContent=row.title;
+    $('issue-tags').replaceChildren(node('span',row.status,'tag status-tag'),...row.labels.map(label=>node('span',label,'tag')));
+    $('issue-description').textContent=row.description || 'No description supplied in this snapshot.';
+    $('archive-item').checked=row.archived;$('revision').textContent='Local revision '+row.revision+'. Original snapshot untouched.';
+    $('run-action').textContent=workspace.contract.name;$('run-action').disabled=!acceptedNow();
+    const result=preview(row);$('guard-result').textContent=!validDraft?'Complete the workflow fields to preview it.':!result.allowed?'Refused: this item is archived. No workflow steps will run.':result.changed?'Allowed: the item is not archived. Review the exact changes below.':'Already matches the workflow. Running it again will not add labels or increment its revision.';
+    const diff=$('preview-changes');diff.replaceChildren();
+    if(result.allowed&&validDraft){const grid=node('div',undefined,'comparison');grid.append(node('p','Status'),node('p',row.status+' -> '+result.next.status),node('p','Labels'),node('p',(row.labels.join(', ')||'(none)')+' -> '+(result.next.labels.join(', ')||'(none)')));diff.append(grid);}
+  }
+  function renderContract() {
+    const acceptedFlag=acceptedNow();$('contract-state').textContent=acceptedFlag?'Accepted / local execution enabled':'Review required';$('contract-state').classList.toggle('accepted',acceptedFlag);
+    $('contract-json').textContent=JSON.stringify(workspace.contract,null,2);
+    $('accept-contract').disabled=!validDraft||!$('review-check').checked||acceptedFlag;
+    $('accept-contract').textContent=acceptedFlag?'Workflow accepted':'Accept this workflow';
+    $('download-app').disabled=!acceptedFlag;
+    $('recipe-origin').textContent=same(workspace.contract,recipe())?'A browser implementation of the reviewed Astra example: add priority, then move to Open. No live AI call.':'Manually configured local recipe. These edits were not generated by Astra. No live AI call.';
+    renderDetail();
+  }
+  function renderActivity() {$('activity').replaceChildren(...workspace.audit.slice().reverse().map(entry=>{const li=node('li',entry.event);li.prepend(node('time',entry.at));return li;}));}
+  function install(next) {
+    if(workspace&&dirty&&!confirm('Replace this workspace? Download your current HTML or JSON first if you want to keep it.'))return false;
+    workspace=next;selected=next.items.find(i=>!i.archived)?.id||next.items[0].id;accepted=null;dirty=false;validDraft=true;listLimit=80;
+    $('workspace').hidden=false;$('remember').checked=false;$('search').value='';$('filter').value='all';$('review-check').checked=false;
+    $('workspace-title').textContent=next.title;$('source-kind').textContent=next.source.kind+' snapshot / local-only workspace';
+    $('action-name').value=next.contract.name;$('action-label').value=next.contract.steps[0].value;$('action-status').value=next.contract.steps[1].value;
+    $('import-report').textContent=next.items.length+' items imported. Full original source retained separately. '+next.warnings.join(' ');
+    $('source-integrity').textContent='Source: '+next.source.name+'\nUTF-8 bytes: '+textSize(next.source.text)+'\nSHA-256: '+(next.source.sha256||'Unavailable in this browser')+'\n\nThe original is never changed by working-copy actions. A checksum detects accidental changes; it is not an authorship signature.';
+    $('save-state').textContent='Working in this tab. Download HTML or JSON before closing.';
+    renderList();renderContract();renderActivity();return true;
+  }
+  async function importText(text,name) {
+    if(busy)return;busy=true;$('load-sample').disabled=true;$('import-file').disabled=true;
+    try {const next=await decode(text,name);if(install(next))notify('Imported locally. Inspect the preview, review the workflow, then accept it. Nothing was uploaded.');}
+    catch(error){notify(error.message||'Import failed. The current workspace was not changed.',true);}
+    finally{busy=false;$('load-sample').disabled=false;$('import-file').disabled=false;$('import-file').value='';}
+  }
+  async function importFile(file) {
+    if(!file)return;if(file.size>MAX_FILE){notify('This file is too large. Sources support 5 MB; Lifeboat backups support 30 MB.',true);return;}
+    try {const text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(await file.arrayBuffer());await importText(text,file.name);}
+    catch{notify('The file could not be read as UTF-8. The current workspace was not changed.',true);}
+  }
+  function download(content,name,type) {
+    const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+  }
+  function filename(){return (workspace.title.replace(/[^a-z0-9_-]+/gi,'-').replace(/^-|-$/g,'').slice(0,65)||'lifeboat')+'-lifeboat';}
+  function saved(){dirty=false;$('save-state').textContent='Download requested. Keep the file; later edits need a new download.';}
+  function refreshRecipe() {
+    if(!workspace)return;accepted=null;$('review-check').checked=false;
+    try{workspace.contract=validateRecipe(recipe($('action-name').value.trim(),$('action-label').value.trim(),$('action-status').value.trim()));validDraft=true;markChanged();}
+    catch(error){validDraft=false;notify(error.message,true);}
+    renderContract();
+  }
+  $('import-file').addEventListener('change',event=>importFile(event.target.files?.[0]));
+  $('dropzone').addEventListener('dragover',event=>{event.preventDefault();$('dropzone').classList.add('dragging');});
+  $('dropzone').addEventListener('dragleave',()=>$('dropzone').classList.remove('dragging'));
+  $('dropzone').addEventListener('drop',event=>{event.preventDefault();$('dropzone').classList.remove('dragging');if(event.dataTransfer.files.length!==1){notify('Please import one snapshot at a time.',true);return;}importFile(event.dataTransfer.files[0]);});
+  $('load-sample').addEventListener('click',()=>importText(JSON.stringify([
+    {id:1,number:1,title:'Refuse to overwrite an existing backup archive',body:'The recovery command should refuse to overwrite an existing backup. Fictional Harbor CLI example.',state:'open',labels:[{name:'safety'}]},
+    {id:2,number:2,title:'Document recovery from a clean install',body:'Write a short recovery checklist for a fresh machine. Fictional Harbor CLI example.',state:'open',labels:[{name:'docs'}]},
+    {id:3,number:3,title:'Preserve executable permissions when restoring a backup',body:'In rc.2, scripts/recover.sh is restored as 0644 instead of 0755. Please reopen this for triage and mark it priority. This is a fictional demo report.',state:'closed',labels:[{name:'bug'}]}
+  ],null,2),'harbor-cli-fictional-sample.json'));
+  $('csv-template').addEventListener('click',()=>download('id,title,description,status,labels,archived\r\nEXAMPLE-1,Review a recovery task,"Replace this fictional row with your own data.",Closed,bug;recovery,false\r\n','lifeboat-import-template.csv','text/csv;charset=utf-8'));
+  $('search').addEventListener('input',()=>{if(workspace){listLimit=80;renderList();}});$('filter').addEventListener('change',()=>{if(workspace){listLimit=80;renderList();}});
+  ['action-name','action-label','action-status'].forEach(id=>$(id).addEventListener('input',refreshRecipe));
+  $('restore-recipe').addEventListener('click',()=>{$('action-name').value='Reopen for triage';$('action-label').value='priority';$('action-status').value='Open';refreshRecipe();});
+  $('review-check').addEventListener('change',()=>{if(workspace)renderContract();});
+  $('accept-contract').addEventListener('click',()=>{
+    if(!workspace||!validDraft||!$('review-check').checked)return;
+    accepted=JSON.stringify(workspace.contract);workspace.lastAcceptance={at:now(),contract:clone(workspace.contract),scope:'This local workspace; not an identity signature.'};
+    audit('Accepted workflow: '+workspace.contract.name);markChanged();renderContract();renderActivity();notify('Workflow accepted. Actions will only change your local working copy. You can now download the standalone HTML app.');
+  });
+  $('run-action').addEventListener('click',()=>{
+    if(!workspace||!acceptedNow()){notify('Review and accept the current workflow first.',true);return;}
+    const row=current(),result=preview(row);
+    if(!result.allowed){notify('Refused: this item is archived. No labels, status, or revision changed.',true);return;}
+    if(!result.changed){notify('Already matches. No duplicate label or extra revision was created.');return;}
+    workspace.items=workspace.items.map(i=>i.id===row.id?result.next:i);audit(row.reference+': '+workspace.contract.name+'; revision '+row.revision+' -> '+result.next.revision);markChanged();renderList();renderDetail();renderActivity();notify('Applied to '+row.reference+'. Your original export is unchanged.');
+  });
+  $('archive-item').addEventListener('change',()=>{const row=current();if(!row)return;row.archived=$('archive-item').checked;row.revision++;audit(row.reference+': '+(row.archived?'archived':'unarchived')+' locally');markChanged();renderList();renderDetail();renderActivity();});
+  $('export-original').addEventListener('click',()=>{if(workspace)download(workspace.source.text,workspace.source.name,'application/octet-stream');});
+  $('export-json').addEventListener('click',()=>{if(workspace){download(JSON.stringify(documentData(),null,2),filename()+'.json','application/json;charset=utf-8');saved();}});
+  $('download-app').addEventListener('click',()=>{
+    if(!workspace||!acceptedNow()){notify('Accept the current workflow before packaging the HTML app.',true);return;}
+    const copy=document.documentElement.cloneNode(true);
+    copy.querySelector('#embedded-workspace').textContent=JSON.stringify(documentData()).replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');
+    copy.querySelector('#workspace').hidden=true;copy.querySelector('#notice').hidden=true;
+    copy.querySelectorAll('input[type=checkbox]').forEach(input=>input.removeAttribute('checked'));
+    copy.querySelector('#remember').removeAttribute('checked');
+    copy.querySelector('title').textContent=workspace.title+' | Lifeboat offline workspace';
+    download('<!doctype html>\n'+copy.outerHTML,filename()+'.html','text/html;charset=utf-8');saved();notify('Standalone HTML download requested. Open that file in a browser, review the embedded workflow, and keep working offline. Download a new copy after later edits.');
+  });
+  $('remember').addEventListener('change',()=>{if(!workspace)return;if($('remember').checked)markChanged();else{$('save-state').textContent='Automatic browser backup is off. An existing saved copy is kept until you choose Forget browser copy.';}});
+  function restoreBackup(){try{const text=localStorage.getItem(STORAGE);if(!text){notify('No Lifeboat Player backup is saved in this browser.');return;}importText(text,'browser-backup.json');}catch{notify('Browser storage is unavailable. Import a downloaded JSON backup instead.',true);}}
+  $('restore-start').addEventListener('click',restoreBackup);$('restore-backup').addEventListener('click',restoreBackup);
+  $('forget-backup').addEventListener('click',()=>{if(!confirm('Remove the Lifeboat Player backup from this browser? Downloaded files and the current tab will not be changed.'))return;try{localStorage.removeItem(STORAGE);$('remember').checked=false;notify('Browser backup removed. The current workspace and downloaded files are unchanged.');}catch{notify('The browser backup could not be removed.',true);}});
+  window.addEventListener('beforeunload',event=>{if(dirty){event.preventDefault();event.returnValue='';}});
+  window.addEventListener('storage',event=>{if(event.key===STORAGE && workspace && $('remember').checked){$('remember').checked=false;notify('Another tab changed the browser backup. Automatic backup is paused here. Download your copy before restoring another one.',true);}});
+  const embedded=$('embedded-workspace').textContent.trim();
+  if(embedded && embedded!=='null')importText(embedded,'embedded-workspace.json');
+})();
+</script>
+</body>
+</html>
