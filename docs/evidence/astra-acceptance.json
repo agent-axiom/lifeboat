@@ -1,0 +1,14 @@
+{
+  "accepted_at": "2026-09-17T11:31:38Z",
+  "accepted_limitations": [
+    "1 pull request records are excluded from working issues and retained as raw source records.",
+    "Closed GitHub issues stay visible in the Closed list and are not archived. Issue closure does not infer due-date completion.",
+    "GitHub API pages form a non-atomic snapshot. Issues, users, labels, and comments may have changed between requests; repository completeness cannot be guaranteed.",
+    "Issue events, reactions, linked projects, attachment file contents, and histories not included in the snapshot are not imported or reconstructed.",
+    "Milestones, issue type, parent data when supplied, creation/update/closure dates, and unknown GitHub keys remain read-only source fields. Milestone dates are not treated as issue deadlines.",
+    "Missing or null optional text is retained in raw provenance and source fields; the working schema may represent it as an empty string.",
+    "The collected snapshot file is preserved byte-for-byte. Its parsed HTTP JSON values do not establish whitespace-identical preservation of the original HTTP wire bodies."
+  ],
+  "contract_hash": "16ca01a5477b0c38cccdb8e807722af9802195638148980159f2423f538f21bd",
+  "intent_hash": "4e0e89027515703064371dc22db209a6c252ff1f0646f6378b85d2aea9ebe0e8"
+}
