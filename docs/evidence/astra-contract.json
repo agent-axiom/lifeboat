@@ -1,0 +1,43 @@
+{
+  "version": "v0.1",
+  "language": "en",
+  "board_name": "demo/harbor-cli",
+  "views": [
+    "board"
+  ],
+  "actions": [
+    {
+      "id": "reopen_for_triage",
+      "label": "Reopen for triage",
+      "kind": "custom",
+      "preconditions": [
+        {
+          "kind": "card_not_archived",
+          "field": null,
+          "value": null,
+          "empty_policy": null
+        }
+      ],
+      "steps": [
+        {
+          "kind": "add_label",
+          "list_ref": null,
+          "label_ref": "label_43d89c987aff521b",
+          "value": null
+        },
+        {
+          "kind": "move_card",
+          "list_ref": "list_145c880f8d2caa2c",
+          "label_ref": null,
+          "value": null
+        }
+      ],
+      "evidence_refs": [
+        "scenario:1",
+        "list:list_145c880f8d2caa2c",
+        "label:label_43d89c987aff521b"
+      ],
+      "failure_message": "Cannot reopen for triage because the selected item is archived."
+    }
+  ]
+}
