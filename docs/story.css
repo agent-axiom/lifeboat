@@ -6,3 +6,4 @@
   overflow: hidden;
   overflow: clip;
 }
+.browser-player-launch{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:24px;padding:20px 24px;border:1px solid #b8c999;border-radius:5px;background:linear-gradient(115deg,#e0edc1,#eef1df)}.browser-player-launch h2{font-size:25px;line-height:1.15;margin:6px 0}.browser-player-launch p{font-size:11px;color:#506548}.browser-player-launch .eyebrow{font-size:8px}.browser-player-launch .button{flex:none}.browser-player-launch .launch-details{min-width:0}@media(max-width:680px){.browser-player-launch{align-items:stretch;flex-direction:column;padding:18px;gap:15px}.browser-player-launch h2{font-size:24px}.browser-player-launch .button{width:100%}}
