@@ -2,6 +2,8 @@
 
 **Turn issue exports into an offline app you own.**
 
+<a href="https://www.producthunt.com/products/lifeboat?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-lifeboat" target="_blank" rel="noopener noreferrer"><img alt="Lifeboat - Turn issue exports into an offline app you own | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1254048&amp;theme=light&amp;t=1789690609456"></a>
+
 Lifeboat imports GitHub, Jira, Trello, or CSV data, lets you describe workflows to
 GPT-6 Astra, and packages an independent local application after you review and
 accept its behavior.
