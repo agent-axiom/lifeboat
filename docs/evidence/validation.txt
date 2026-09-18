@@ -1,0 +1,98 @@
+LIFEBOAT: BOUNDED VALIDATION RECORD
+Updated: 2026-09-18
+
+This is a maintainer/agent check, not an independent customer testimonial.
+No new paid model requests were made during the September 18 checks.
+
+1. PUBLIC BROWSER SAMPLE
+
+Observed on the published GitHub Pages site:
+- Contract acceptance was required before running the workflow.
+- Issue 3 changed from Closed to Open, retained bug, added priority, and
+  advanced from revision 1 to revision 2.
+- Repeating the action did not duplicate labels or increment the revision.
+- Archiving the issue blocked the workflow without changing its state.
+- A reload preserved the modified issue and accepted contract.
+- Export produced a real downloaded JSON file. It contained the unchanged
+  original Closed/bug snapshot and the current Open/bug/priority state.
+- Reset restored the initial sample. The reset-cancel branch was not
+  conclusively exercised through the automation interface.
+- Browser console inspection returned no errors in the inspected interval.
+
+Known layout issue, not yet corrected in this record:
+- The decorative hero orbit extends the scrollable page at some widths:
+  826px content at a 785px viewport; 404px content at a 390px viewport.
+- The 1280px desktop view did not show horizontal overflow.
+- Blocked-storage, multiple-browser, and assistive-technology coverage is
+  not complete. Do not interpret these checks as exhaustive e2e coverage.
+
+2. FRESH STUDIO DISTRIBUTION, NO-AI PATH
+
+- Downloaded the public Studio ZIP with curl into a new isolated directory.
+- Ran the included launcher with a clean environment, no API keys, and a
+  fresh workspace. This was the existing development Mac, not a clean OS.
+- Imported the bundled fictional GitHub-format Harbor CLI example.
+- Reviewed the allowed context, chose the fixed no-AI workflow, inspected
+  its contract, created an isolated preview, and ran Move to Closed.
+- The preview changed the selected item to Closed and revision 2.
+- Accepted the exact contract and reached Ready in Studio.
+- Downloaded the generated ZIP through the browser and passed ZIP CRC checks.
+
+No-AI build: 0d4ab4912a5ff7fbdd4cd28c660b9e29
+Accepted contract hash:
+2f36e7c4e738f1a1897f5579fffad1ceeaa1da1ade5aa2a1c09cf422fdd20241
+Generated ZIP SHA-256:
+36ca73bb4fd949de82b134e4ab7e0268528f44a2d39df73d423f60bd25c6050c
+
+BLOCKER: FRESH BROWSER-DOWNLOADED PLAYER
+
+After stopping the test Studio, the generated Player exited with code 137
+before starting its server. The downloaded executable had the macOS
+quarantine attribute. Its on-disk code signature verified, but Gatekeeper
+assessment rejected it. The executable SHA-256 was identical across the
+new ZIP, the bundled Studio Player, and the previously tested Astra Player:
+89c88f3539724a6a5dd4fe91981126cd6211678388ba73a9a2ef77f36454eb84
+
+This rules out a binary-content mismatch in that check; it does not make
+the fresh-download experience successful. Developer ID distribution signing
+and notarization remain unresolved. System protection was not disabled and
+quarantine was not removed. A fresh independent Player run was NOT passed.
+
+3. EARLIER REAL ASTRA PLAYER CHECK, SEPTEMBER 17
+
+This is a separate, earlier bounded result. GPT-6 Astra proposed the
+reopen_for_triage workflow on fictional Harbor CLI data. The accepted
+contract required card_not_archived, added the existing priority label,
+and moved the item to Open.
+
+A previously extracted Player ran with Studio stopped, no API keys,
+and external outbound networking denied for the Player process. The
+workflow worked, edits survived restarting that Player, and the original
+export checksum remained unchanged.
+
+Real Astra build: b0501960f690095f6eaf99235c4bdc55
+Accepted contract hash:
+16ca01a5477b0c38cccdb8e807722af9802195638148980159f2423f538f21bd
+Original export SHA-256:
+6cf2ca97f336b197086399c0f99af0bf88047d76ec738dd458ced3b88f8c3c5c
+
+The adjacent astra-contract.json and astra-acceptance.json are copied from
+that actual release artifact, not reconstructed from the website sample.
+The earlier result does not override the new Gatekeeper distribution blocker.
+
+4. WHAT THE IMAGES SHOW
+
+studio-real.png: actual Studio UI during the September 18 no-AI packaging
+check. It is not a new model run.
+player-real.png: real rendered interface state from the previously validated
+Astra Player, including the custom action and changed issue. It is not a
+new fresh-install validation or an invented product mockup.
+
+5. INDEPENDENT USERS
+
+The first-user checklist is at:
+https://github.com/agent-axiom/lifeboat/issues/1
+
+It is an invitation to collect independent reports, not evidence that
+participants have already completed it. No user count, testimonial, or
+successful installation rate is claimed here.
